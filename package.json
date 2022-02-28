@@ -1,0 +1,29 @@
+{
+  "name": "subscription",
+  "version": "1.0.0",
+  "description": "Assignment Round By Wishup",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rahul271297/Subscription.git"
+  },
+  "keywords": [
+    "/user",
+    "/subscription"
+  ],
+  "author": "Rahul Kumar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Rahul271297/Subscription/issues"
+  },
+  "homepage": "https://github.com/Rahul271297/Subscription#readme",
+  "dependencies": {
+    "express": "^4.17.3",
+    "mongoose": "^6.2.3",
+    "route": "^0.2.5"
+  }
+}
