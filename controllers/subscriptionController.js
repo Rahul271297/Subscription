@@ -70,7 +70,23 @@ const newSubs = async function(req,res) {
         return res.status(500).send({status:false,Message:error.message}) 
     }
 }
-module.exports = {newSubs}
+
+//**************************Get with UserName *//////////////////////
+const getSubs = async(req, res) => {
+    try {
+        let username = req.params.user_name
+        
+        let subsFound = await SubscriptionModel.findOne({ user_name:username  }).select({plan_id:1,validTill:1,start_date:1,_id:0})
+
+        if (!subsFound) {
+            return res.status(404).send({ status: false, msg: "There is no user with this name" });
+        }
+        return res.status(200).send({ status: true, message: 'Subscription Details', data: subsFound });
+    } catch (err) {
+        return res.status(500).send({ status: false, msg: err.message });
+    }
+}
+module.exports = {newSubs,getSubs}
       
             
         
