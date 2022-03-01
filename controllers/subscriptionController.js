@@ -77,16 +77,39 @@ const getSubs = async(req, res) => {
         let username = req.params.user_name
         
         let subsFound = await SubscriptionModel.findOne({ user_name:username  }).select({plan_id:1,validTill:1,start_date:1,_id:0})
-
+        
         if (!subsFound) {
             return res.status(404).send({ status: false, msg: "There is no user with this name" });
         }
+       
         return res.status(200).send({ status: true, message: 'Subscription Details', data: subsFound });
     } catch (err) {
         return res.status(500).send({ status: false, msg: err.message });
     }
 }
-module.exports = {newSubs,getSubs}
+//*****************************Get with user Name and Date *///////////////////
+const getSubsWithDate = async(req,res)=>{
+    try{
+        let username = req.params.user_name
+        let date = req.params.start_date
+        let subsFound = await SubscriptionModel.findOne({ user_name:username  }).select({plan_id:1,validTill:1,start_date:1,_id:0})
+        
+        if (!subsFound) {
+            return res.status(404).send({ status: false, msg: "There is no user with this name" });
+        }
+        let plan = subsFound.plan_id
+        const startDate = Date(subsFound.start_date);
+        const endDate = Date(subsFound.validTill);
+        const diff = Math.abs(endDate-startDate)
+        const daysLeft = diff/(1000*3600*24)
+        let savedData = {plan,daysLeft}
+      
+        return res.status(200).send({ status: true, message: 'Subscription Details', data: savedData });
+    }catch(err){
+        return res.status(500).send({status:false,msg:err.message})
+    }
+}
+module.exports = {newSubs,getSubs,getSubsWithDate}
       
             
         

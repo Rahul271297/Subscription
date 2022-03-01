@@ -9,5 +9,6 @@ router.get("/user/:user_name",UserController.getUser)
 //Subscription routes
 router.post("/subscription",SubscriptionController.newSubs)
 router.get("/subscription/:user_name",SubscriptionController.getSubs)
+router.get("/subscription/:user_name/:start_date",SubscriptionController.getSubsWithDate)
 module.exports = router;
 
